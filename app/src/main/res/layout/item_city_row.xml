@@ -23,7 +23,6 @@
             tools:ignore="UseCompoundDrawables">
 
             <ImageButton
-
                 android:id="@+id/btnDelete"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
