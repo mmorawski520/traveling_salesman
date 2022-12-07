@@ -25,12 +25,14 @@
             android:id="@+id/btnCalculate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="12dp"
             android:text="Calculate" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
+            android:layout_margin="12dp"
             android:orientation="horizontal">
 
             <ImageButton
@@ -38,29 +40,30 @@
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_weight="1"
+                android:contentDescription="@string/todo"
                 android:scaleType="fitCenter"
                 app:srcCompat="@drawable/file_export_solid"
-                tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck,SpeakableTextPresentCheck"
-                android:contentDescription="@string/todo" />
+                tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
 
             <ImageButton
-                android:id="@+id/btnSave"
+                android:id="@+id/btnGenerateCities"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_weight="1"
+                android:contentDescription="TODO"
                 android:scaleType="fitCenter"
                 app:srcCompat="@drawable/floppy_disk_solid"
-                tools:ignore="SpeakableTextPresentCheck"
-                android:contentDescription="TODO" />
+                tools:ignore="SpeakableTextPresentCheck" />
+
             <ImageButton
                 android:id="@+id/btnSettings"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_weight="1"
+                android:contentDescription="TODO"
                 android:scaleType="fitCenter"
                 app:srcCompat="@drawable/gear_solid"
-                tools:ignore="SpeakableTextPresentCheck"
-                android:contentDescription="TODO" />
+                tools:ignore="SpeakableTextPresentCheck" />
 
         </LinearLayout>
     </LinearLayout>
