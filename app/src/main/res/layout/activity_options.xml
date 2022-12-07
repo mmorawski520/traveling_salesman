@@ -15,6 +15,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="391dp">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
         <EditText
             android:id="@+id/editTextCity"
             android:layout_width="match_parent"
@@ -39,16 +46,10 @@
             android:layout_height="wrap_content"
             android:text="add city" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="391dp">
-
-        </androidx.recyclerview.widget.RecyclerView>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:gravity="center"
             android:orientation="horizontal">
 
             <Button
@@ -58,12 +59,6 @@
                 android:minHeight="48dp"
                 android:text="Save" />
 
-            <Button
-                android:id="@+id/btnDelete"
-                android:layout_width="120dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Delete" />
         </LinearLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

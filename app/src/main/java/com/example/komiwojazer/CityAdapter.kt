@@ -12,29 +12,39 @@ import androidx.recyclerview.widget.RecyclerView
 
 data class CitiesViewModel(val city: String, val distance: Int) {
 }
-class CustomAdapter(private val mList: List<CitiesViewModel>) : RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_city_row, parent, false)
+class CityAdapter(private val list: List<CitiesViewModel>)
+    : RecyclerView.Adapter<MovieViewHolder>() {
 
-        return ViewHolder(view)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
+        val inflater = LayoutInflater.from(parent.context)
+        return MovieViewHolder(inflater, parent)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-
-        val ItemsViewModel = mList[position]
-        holder.cityView.text = ItemsViewModel.city
-        holder.distanceView.text = ItemsViewModel.distance.toString()
+    override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
+        val movie: CitiesViewModel = list[position]
+        holder.bind(movie)
     }
 
-    override fun getItemCount(): Int {
-        return mList.size
+    override fun getItemCount(): Int = list.size
+
+}
+
+class MovieViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
+    RecyclerView.ViewHolder(inflater.inflate(R.layout.item_city_row, parent, false)) {
+
+    private var cityTextView: TextView? = null
+    private var distanceTextView: TextView? = null
+
+
+    init {
+        cityTextView = itemView.findViewById(R.id.city)
+        distanceTextView = itemView.findViewById(R.id.distance)
     }
 
-    class ViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {
-        val cityView: TextView = itemView.findViewById(R.id.city)
-        val distanceView: TextView = itemView.findViewById(R.id.distance)
-
+    fun bind(movie: CitiesViewModel) {
+        cityTextView?.text = movie.city
+        distanceTextView?.text = movie.distance.toString()
     }
+
 }

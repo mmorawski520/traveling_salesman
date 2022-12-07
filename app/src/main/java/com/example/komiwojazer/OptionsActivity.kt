@@ -3,11 +3,15 @@ package com.example.komiwojazer
 import android.content.Intent
 import android.location.GnssAntennaInfo
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ListAdapter
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 import kotlin.random.Random
 
 
@@ -18,8 +22,8 @@ class OptionsActivity : AppCompatActivity() {
     lateinit var editTextCity:EditText;
     lateinit var editTextDistance:EditText;
     lateinit var recyclerview: RecyclerView;
-    val data = ArrayList<CitiesViewModel>()
-    lateinit var cities:Array<City>;
+    lateinit var cities:MutableList<CitiesViewModel>;
+    val SIZE = 8
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,7 +31,6 @@ class OptionsActivity : AppCompatActivity() {
 
         btnAdd = findViewById(R.id.btnAdd)
         btnSave = findViewById(R.id.btnSave)
-        btnDelete = findViewById(R.id.btnDelete)
 
         recyclerview = findViewById<RecyclerView>(R.id.recyclerView);
         editTextCity = findViewById(R.id.editTextCity)
@@ -39,26 +42,39 @@ class OptionsActivity : AppCompatActivity() {
         }
 
         btnAdd.setOnClickListener {
-
+            if(cities.size < 8){
+                cities.add(CitiesViewModel(editTextCity.text.toString(),
+                    editTextDistance.text.toString().toInt())
+                )
+                recyclerview.adapter?.notifyItemInserted(cities.size)
+            }
         }
-        btnDelete.setOnClickListener {
 
-        }
-
+        cities = mutableListOf()
         generateRandomCities()
+        recyclerview.layoutManager = LinearLayoutManager(this)
+        recyclerview.apply {
+            layoutManager = LinearLayoutManager(this@OptionsActivity)
+            adapter = CityAdapter(cities)
+        }
+
+        val swipeToDeleteCallback = object:SwipeToDeleteCallback(){
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val pos = viewHolder.adapterPosition
+                cities.removeAt(pos)
+                recyclerview.adapter?.notifyItemRemoved(pos)
+            }
+        }
+
+        val itemTouchHelper = ItemTouchHelper(swipeToDeleteCallback)
+
+        itemTouchHelper.attachToRecyclerView(recyclerview)
     }
 
     private fun generateRandomCities(){
-
-        recyclerview.layoutManager = LinearLayoutManager(this)
-
-
-        for (i in 1..16) {
-            data.add(CitiesViewModel("City " + i.toString(), Random.nextInt(1, 10)))
-
+        for(i in 1..SIZE){
+            cities.add(CitiesViewModel("City"+i.toString(),Random.nextInt(1,10)))
         }
-
-        val adapter = CustomAdapter(data)
-        recyclerview.adapter = adapter
+        recyclerview.adapter?.notifyDataSetChanged()
     }
 }
