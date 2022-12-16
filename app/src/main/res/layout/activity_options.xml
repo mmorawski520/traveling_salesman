@@ -26,32 +26,40 @@
             android:id="@+id/editTextCity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:autofillHints=""
             android:ems="10"
             android:inputType="textPersonName"
             android:minHeight="48dp"
-            android:text="@string/city"
-            android:autofillHints="" />
+            android:text="@string/city" />
 
         <EditText
             android:id="@+id/editTextDistance"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
             android:ems="10"
-            android:inputType="textPersonName"
+            android:inputType="number"
             android:minHeight="48dp"
-            android:text="@string/distance"
-            android:autofillHints="" />
+
+            android:importantForAutofill="no" />
 
         <Button
             android:id="@+id/btnGenerate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
             android:text="@string/generate" />
 
         <Button
             android:id="@+id/btnAdd"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
             android:text="@string/add_city" />
 
         <LinearLayout

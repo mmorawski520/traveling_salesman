@@ -92,11 +92,19 @@ class MainActivity : AppCompatActivity() {
         }
 
         btnExport.setOnClickListener {
-            MediaStore.Images.Media.insertImage(
-                getContentResolver(), takeScreenshot(),
-                getCurrentDate() + Random.hashCode(), "description"
-            )
-            Toast.makeText(this, "Image had been saved in your gallery", Toast.LENGTH_SHORT).show()
+            if(cities.size>1) {
+                MediaStore.Images.Media.insertImage(
+                    getContentResolver(), takeScreenshot(),
+                    getCurrentDate() + Random.hashCode(), "description"
+                )
+                Toast.makeText(this, "Image had been saved in your gallery", Toast.LENGTH_SHORT)
+                    .show()
+            }
+            else
+            {
+                Toast.makeText(this, "There is no result to save", Toast.LENGTH_SHORT)
+                    .show()
+            }
         }
 
         btnCalculate.setOnClickListener {

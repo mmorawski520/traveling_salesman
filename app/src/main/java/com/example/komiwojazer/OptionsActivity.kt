@@ -36,30 +36,38 @@ class OptionsActivity : AppCompatActivity() {
         val singleToneClass: citiesSingletone = citiesSingletone.instance
 
         btnSave.setOnClickListener {
-            singleToneClass.value = cities
+            isEdited = false
+            if (isEdited)
+                singleToneClass.value = cities
             val intent = Intent(this, MainActivity::class.java)
             this.startActivity(intent)
         }
 
         btnAdd.setOnClickListener {
-            if (cities.size < SIZE) {
-                if (cities.size > 1)
-                    cities.add(
-                        CitiesViewModel(
-                            editTextCity.text.toString(),
-                            editTextDistance.text.toString().toInt(), cities.last().city
+
+            var canAdd = validateInputs();
+
+            if (canAdd == true) {
+                if (cities.size < SIZE) {
+                    if (cities.size > 1)
+                        cities.add(
+                            CitiesViewModel(
+                                editTextCity.text.toString(),
+                                editTextDistance.text.toString().toInt(), cities.last().city
+                            )
                         )
-                    )
-                else
-                    cities.add(
-                        CitiesViewModel(
-                            editTextCity.text.toString(),
-                            editTextDistance.text.toString().toInt(), ""
+                    else
+                        cities.add(
+                            CitiesViewModel(
+                                editTextCity.text.toString(),
+                                editTextDistance.text.toString().toInt(), ""
+                            )
                         )
-                    )
-                recyclerview.adapter?.notifyItemInserted(cities.size)
-            } else {
-                Toast.makeText(this, "You can't add more cities", Toast.LENGTH_SHORT).show()
+                    isEdited = true
+                    recyclerview.adapter?.notifyItemInserted(cities.size)
+                } else {
+                    Toast.makeText(this, "You can't add more cities", Toast.LENGTH_SHORT).show()
+                }
             }
         }
 
@@ -85,9 +93,9 @@ class OptionsActivity : AppCompatActivity() {
                     }
                 }
             }
-
+            isEdited = true
             recyclerview.adapter?.notifyDataSetChanged()
-            singleToneClass.value = cities
+
             Toast.makeText(this, "Cities had been generated", Toast.LENGTH_SHORT).show()
         }
 
@@ -104,12 +112,25 @@ class OptionsActivity : AppCompatActivity() {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val pos = viewHolder.adapterPosition
                 cities.removeAt(pos)
+                isEdited = true
                 recyclerview.adapter?.notifyItemRemoved(pos)
             }
         }
 
         val itemTouchHelper = ItemTouchHelper(swipeToDeleteCallback)
         itemTouchHelper.attachToRecyclerView(recyclerview)
+    }
+
+    fun validateInputs(): Boolean {
+        if (editTextCity.getText().toString().trim().length == 0
+            || editTextDistance.getText().toString().trim().length == 0
+        ) {
+            Toast.makeText(this, "Invalid input data", Toast.LENGTH_SHORT)
+                .show()
+            return false;
+        } else {
+            return true;
+        }
     }
 
     fun initLayoutObjects() {
