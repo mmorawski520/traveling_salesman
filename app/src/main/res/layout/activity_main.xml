@@ -32,7 +32,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="12dp"
-            android:text="Calculate" />
+            android:text="@string/calculate" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -49,14 +49,14 @@
                 android:contentDescription="@string/todo"
                 android:scaleType="fitCenter"
                 app:srcCompat="@drawable/file_export_solid"
-                tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
+                tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck,SpeakableTextPresentCheck,DuplicateSpeakableTextCheck" />
 
             <ImageButton
                 android:id="@+id/btnGenerateCities"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_weight="1"
-                android:contentDescription="TODO"
+                android:contentDescription="@string/todo2"
                 android:scaleType="fitCenter"
                 app:srcCompat="@drawable/dice_solid"
 
@@ -67,7 +67,7 @@
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_weight="1"
-                android:contentDescription="TODO"
+                android:contentDescription="@string/todo3"
                 android:scaleType="fitCenter"
                 app:srcCompat="@drawable/gear_solid"
                 tools:ignore="SpeakableTextPresentCheck" />

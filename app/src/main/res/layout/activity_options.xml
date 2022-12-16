@@ -29,7 +29,8 @@
             android:ems="10"
             android:inputType="textPersonName"
             android:minHeight="48dp"
-            android:text="city" />
+            android:text="@string/city"
+            android:autofillHints="" />
 
         <EditText
             android:id="@+id/editTextDistance"
@@ -38,19 +39,20 @@
             android:ems="10"
             android:inputType="textPersonName"
             android:minHeight="48dp"
-            android:text="distance" />
+            android:text="@string/distance"
+            android:autofillHints="" />
 
         <Button
             android:id="@+id/btnGenerate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Generate" />
+            android:text="@string/generate" />
 
         <Button
             android:id="@+id/btnAdd"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="add city" />
+            android:text="@string/add_city" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -64,7 +66,7 @@
                 android:layout_width="199dp"
                 android:layout_height="wrap_content"
                 android:minHeight="48dp"
-                android:text="Save" />
+                android:text="@string/save" />
 
         </LinearLayout>
     </LinearLayout>

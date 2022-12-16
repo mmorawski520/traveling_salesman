@@ -3,11 +3,11 @@ package com.example.komiwojazer
 import java.util.*
 
 class Algorithm(start: Int, distance: Array<IntArray>) {
-    private var N: Int=0
-    private var start: Int =0
+    private var N: Int = 0
+    private var start: Int = 0
     private lateinit var distance: Array<IntArray>
     private var minCost = Double.POSITIVE_INFINITY.toInt()
-    private var isSolved:Boolean = false
+    private var isSolved: Boolean = false
     private val tour: MutableList<Int> = ArrayList()
 
     constructor(distance: Array<IntArray>) : this(0, distance) {
@@ -90,29 +90,29 @@ class Algorithm(start: Int, distance: Array<IntArray>) {
         isSolved = true
     }
 
-        private fun notIn(elem: Int, subset: Int): Boolean {
-            return 1 shl elem and subset == 0
-        }
+    private fun notIn(elem: Int, subset: Int): Boolean {
+        return 1 shl elem and subset == 0
+    }
 
-        fun combinations(r: Int, n: Int): List<Int> {
-            val subsets: MutableList<Int> = ArrayList()
-            combinations(0, 0, r, n, subsets)
-            return subsets
-        }
+    fun combinations(r: Int, n: Int): List<Int> {
+        val subsets: MutableList<Int> = ArrayList()
+        combinations(0, 0, r, n, subsets)
+        return subsets
+    }
 
-        private fun combinations(set: Int, at: Int, r: Int, n: Int, subsets: MutableList<Int>) {
-            var set = set
-            val elementsLeftToPick = n - at
-            if (elementsLeftToPick < r) return
-            if (r == 0) {
-                subsets.add(set)
-            } else {
-                for (i in at until n) {
-                    set = set or (1 shl i)
-                    combinations(set, i + 1, r - 1, n, subsets)
-                    set = set and (1 shl i).inv()
-                }
+    private fun combinations(set: Int, at: Int, r: Int, n: Int, subsets: MutableList<Int>) {
+        var set = set
+        val elementsLeftToPick = n - at
+        if (elementsLeftToPick < r) return
+        if (r == 0) {
+            subsets.add(set)
+        } else {
+            for (i in at until n) {
+                set = set or (1 shl i)
+                combinations(set, i + 1, r - 1, n, subsets)
+                set = set and (1 shl i).inv()
             }
         }
+    }
 
 }

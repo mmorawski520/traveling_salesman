@@ -4,6 +4,7 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
@@ -12,50 +13,36 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import java.io.File
-import java.io.FileOutputStream
-import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
 import kotlin.random.Random
-import kotlin.reflect.typeOf
-
 
 class MainActivity : AppCompatActivity() {
-    lateinit var btnGenerateCities: ImageButton;
-    lateinit var btnOptions: ImageButton;
-    lateinit var btnExport: ImageButton;
-    lateinit var btnCalculate: Button;
-    lateinit var textViewResult: TextView;
-    lateinit var recyclerView: RecyclerView;
-    lateinit var cities: MutableList<CitiesViewModel>;
-    lateinit var cityNames: MutableList<String>;
-    val tsp2 = Array(8) { IntArray(8) }
-    val SIZE = 8
+    private lateinit var btnGenerateCities: ImageButton
+    private lateinit var btnOptions: ImageButton
+    private lateinit var btnExport: ImageButton
+    private lateinit var btnCalculate: Button
+    private lateinit var textViewResult: TextView
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var cities: MutableList<CitiesViewModel>
+    private lateinit var cityNames: MutableList<String>
 
+    private val SIZE = 8
+    private val tsp2 = Array(SIZE) { IntArray(SIZE) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        btnGenerateCities = findViewById(R.id.btnGenerateCities);
-        btnOptions = findViewById(R.id.btnSettings)
-        btnExport = findViewById(R.id.btnExport)
-        btnCalculate = findViewById(R.id.btnCalculate)
-        textViewResult = findViewById(R.id.textViewResult)
-        recyclerView = findViewById(R.id.recyclerView)
-
+        initLayoutObjects()
         cities = mutableListOf()
         cityNames = mutableListOf()
-        val singleToneClass: citiesSingletone =
-            com.example.komiwojazer.citiesSingletone.instance
+
+        val singleToneClass: citiesSingletone = citiesSingletone.instance
 
         try {
-
-
             cities = singleToneClass.value
-            var curCityIndex = 0;
+            var curCityIndex = 0
             for (i in 0..SIZE - 1) {
                 for (j in 0..SIZE - 1) {
                     if (j == curCityIndex) {
@@ -69,8 +56,9 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, "Cities had been loaded", Toast.LENGTH_SHORT).show()
 
         } catch (e: Exception) {
-            Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show()
+            Log.e("err","Something went wrong")
         }
+
         btnGenerateCities.setOnClickListener {
             cities = mutableListOf()
             for (i in 1..SIZE) {
@@ -82,7 +70,8 @@ class MainActivity : AppCompatActivity() {
                     )
                 )
             }
-            var curCityIndex = 0;
+
+            var curCityIndex = 0
             for (i in 0..SIZE - 1) {
                 for (j in 0..SIZE - 1) {
                     if (j == curCityIndex) {
@@ -93,8 +82,6 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
             }
-
-
             Toast.makeText(this, "Cities had been generated", Toast.LENGTH_SHORT).show()
         }
 
@@ -107,16 +94,16 @@ class MainActivity : AppCompatActivity() {
         btnExport.setOnClickListener {
             MediaStore.Images.Media.insertImage(
                 getContentResolver(), takeScreenshot(),
-                getcurrentDate() + Random.hashCode(), "description"
-            );
+                getCurrentDate() + Random.hashCode(), "description"
+            )
             Toast.makeText(this, "Image had been saved in your gallery", Toast.LENGTH_SHORT).show()
         }
 
         btnCalculate.setOnClickListener {
             if (cities.size != 0) {
-                var a = Algorithm(tsp2)
+                val a = Algorithm(tsp2)
                 a.solve()
-                var tour = a.getTour()
+                val tour = a.getTour()
 
                 cityNames.clear()
                 for (i in 0..SIZE) {
@@ -127,12 +114,12 @@ class MainActivity : AppCompatActivity() {
                 recyclerView.layoutManager = LinearLayoutManager(this)
                 recyclerView.adapter = adapter
                 recyclerView.adapter?.notifyDataSetChanged()
-                textViewResult.text = "Cost of the trip " + a.getCost.toString()
+                textViewResult.setText("Cost of the trip " + a.getCost.toString())
             }
         }
     }
 
-    fun getcurrentDate(): String? {
+    fun getCurrentDate(): String? {
         val c: Date = Calendar.getInstance().getTime()
         val simpleDateFormat = SimpleDateFormat("yyyy/MM/dd")
         return simpleDateFormat.format(c)
@@ -142,5 +129,14 @@ class MainActivity : AppCompatActivity() {
         val rootView: View = findViewById<View>(android.R.id.content).rootView
         rootView.setDrawingCacheEnabled(true)
         return rootView.getDrawingCache()
+    }
+
+    fun initLayoutObjects(){
+        btnGenerateCities = findViewById(R.id.btnGenerateCities)
+        btnOptions = findViewById(R.id.btnSettings)
+        btnExport = findViewById(R.id.btnExport)
+        btnCalculate = findViewById(R.id.btnCalculate)
+        textViewResult = findViewById(R.id.textViewResult)
+        recyclerView = findViewById(R.id.recyclerView)
     }
 }
