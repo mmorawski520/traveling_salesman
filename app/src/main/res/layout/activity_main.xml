@@ -9,16 +9,22 @@
     <LinearLayout
         android:layout_width="409dp"
         android:layout_height="729dp"
+        android:layout_marginTop="100dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="480dp" />
+
         <TextView
             android:id="@+id/textViewResult"
             android:layout_width="match_parent"
-            android:layout_height="560dp"
+            android:layout_height="wrap_content"
             android:gravity="center" />
 
         <Button
@@ -52,7 +58,8 @@
                 android:layout_weight="1"
                 android:contentDescription="TODO"
                 android:scaleType="fitCenter"
-                app:srcCompat="@drawable/floppy_disk_solid"
+                app:srcCompat="@drawable/dice_solid"
+
                 tools:ignore="SpeakableTextPresentCheck" />
 
             <ImageButton

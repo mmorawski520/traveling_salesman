@@ -22,7 +22,7 @@
             android:orientation="horizontal"
             tools:ignore="UseCompoundDrawables">
             <TextView
-                android:id="@+id/city"
+                android:id="@+id/cityResult"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -30,32 +30,6 @@
                 android:textSize="18sp"
                 android:textStyle="bold"
                 tools:text="City" />
-
-            <TextView
-                android:id="@+id/textViewTo"
-                android:layout_width="19dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="to" />
-
-            <TextView
-                android:id="@+id/cityDestination"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@android:color/black"
-                android:textSize="18sp"
-                android:layout_weight="1"
-                android:textStyle="bold"
-                tools:text="City" />
-
-            <TextView
-                android:id="@+id/distance"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-
-                android:text="0"
-                android:textAlignment="textStart" />
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
