@@ -56,3 +56,12 @@ Ochrona przed zapisaniem wyniku, gdy aplikacja nie obliczyła jeszcze wyniku
 
 ## Cykl życia aplikacji
 Dane mają być zapisane a aplikacji do zabicia procesu.
+
+## Testowanie
+Testowanie aplikacji ma polegać na:
+ - sprawdzeniu czy aplikacja nie crashuje przy niepoprawnym podaniu danych do aplikacji
+ - spradzeniu czy dane zostają w aplikacji, gdy aplikacja działa w tle
+ - sprawdzeniu czy algorytm działa poprawnie
+ - sprawdzeniu czy wszystkie elementy layoutu wyświetlają się prawidłowo
+ - sprawdzeniu czy zrzut ekranu z wynikiem jest zapisywany w galerii
+ - sprawdzeniu czy nie da się zapisać wyniku gdy wynik nie został wyświetlony
